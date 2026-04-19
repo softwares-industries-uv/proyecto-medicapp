@@ -70,6 +70,6 @@ ID--------Requisito------Producto/Proyecto-----Funcional/No funcional-----Sistem
           cuando queden 5 o menos
           unidades
 
-(MA7)-----El sistema debe permitir---------Producto-----No funcional------Sistema
-          buscar hospitales o clinicas              (retriccion tecnologica)
+(MA7)-----El sistema debe permitir---------Producto-----No funcional (retriccion tecnologica)------Sistema
+          buscar hospitales o clinicas              
           cercanas
