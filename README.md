@@ -2,6 +2,7 @@
 ##Lista historias:
 
 ID-----Nombre------Issue
+
 HU01---Consultrar tratamiento o medicamento------#9
 
 HU02---Ver indicaciones o efectos secundarios----#10
