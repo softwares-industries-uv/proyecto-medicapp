@@ -27,7 +27,7 @@ HU11---Dar acceso a informacion medica a otros---#22
 
 HU12---Poder registrarse en la app---------------#24
 
-Hu13---Poder iniciar sesion en la app------------#25
+HU13---Poder iniciar sesion en la app------------#25
 
 ----------------------------------------------------------------------------------------------------------
 
