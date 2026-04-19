@@ -25,6 +25,9 @@ HU10---Informacion sobre consulta medica---------#21
 
 HU11---Dar acceso a informacion medica a otros---#22
 
+HU12---Poder registrarse en la app---------------#24
+
+Hu13---Poder iniciar sesion en la app------------#25
 
 ----------------------------------------------------------------------------------------------------------
 
