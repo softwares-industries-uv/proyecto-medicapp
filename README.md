@@ -30,22 +30,17 @@ HU11---Dar acceso a informacion medica a otros---#22
 
 ##Responsabilidades del equipo:
 
-Integrante-----Rol-----Items de la rubrica a cargo
+Integrante--------------Rol-------------------Items de la rubrica a cargo
 
-Fabián--------Developer----Historias Usuario-CA/Requerimientos Extrafuncionales
-Gamboa
+Fabián Gamboa-----------Developer-------------Historias Usuario-CA/Requerimientos Extrafuncionales
 
-Sebastián-----Scrum Master-
-Rodriguez
+Sebastián Rodriguez-----Scrum Master----------
 
-Benjamin------Developer----
-Quesada
+Benjamin Quesada--------Developer-------------
 
-Antonella-----Developer----Historias Usuario-CA
-Canale-Mayet
+Antonella Canale-Mayet--Developer-------------Historias Usuario-CA
 
-Renato--------Product------
-Pereira       Owner
+Renato Pereira----------Product Owner---------
 
 ----------------------------------------------------------------------------------------------------------
 
