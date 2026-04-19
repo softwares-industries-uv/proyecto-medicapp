@@ -62,4 +62,14 @@ ID--------Requisito------Producto/Proyecto-----Funcional/No funcional-----Sistem
 (MA4)-----El sistema debe almacenar--------Producto-----Funcional---------Software
           el historial de medicamentos
 
-(MA5)-----
+(MA5)-----El sistema debe registrar la-----Producto-----Funcional---------Software
+          cantidad y actualizar el stock
+          disponible del medicamento
+
+(MA6)-----El sistema debe notificar--------Producto-----Funcional---------Software
+          cuando queden 5 o menos
+          unidades
+
+(MA7)-----El sistema debe permitir---------Producto-----No funcional------Sistema
+          buscar hospitales o clinicas              (retriccion tecnologica)
+          cercanas
