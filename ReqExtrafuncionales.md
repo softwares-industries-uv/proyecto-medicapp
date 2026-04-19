@@ -1,3 +1,5 @@
+----------------------------------------------------------------------------------------------------------
+
 ##Catalogo Requerimientos Extrafuncionales:
 
 ID--------Requisito------Producto/Proyecto-----Funcional/No funcional-----Sistema/Software
@@ -20,3 +22,5 @@ cercanas
 (MA8)-----El sistema debe permitir---------Producto-----Funcional---------Software registrar alergias o efectos secundarios a tratamientos
 
 (MA9)-----El sistema permite buscar-------Producto------No funcional (restriccion tecnologica)------Sistema informacion del medicamento o tratamiento
+
+----------------------------------------------------------------------------------------------------------
