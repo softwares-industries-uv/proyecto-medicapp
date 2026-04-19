@@ -3,7 +3,7 @@
 
 ID-----Nombre------Issue
 
-HU01---Consultrar tratamiento o medicamento------#9
+HU01---Consultar tratamiento o medicamento------#9
 
 HU02---Ver indicaciones o efectos secundarios----#10
 
@@ -70,6 +70,19 @@ ID--------Requisito------Producto/Proyecto-----Funcional/No funcional-----Sistem
           cuando queden 5 o menos
           unidades
 
-(MA7)-----El sistema debe permitir---------Producto-----No funcional (retriccion tecnologica)------Sistema
+(MA7)-----El sistema debe permitir---------Producto-----No funcional (restriccion tecnologica)------Sistema
           buscar hospitales o clinicas              
           cercanas
+
+(MA8)-----El sistema debe permitir---------Producto-----Funcional---------Software
+          registrar alergias o efectos
+          secundarios a tratamientos
+
+(MA9)-----El sistema permite buscar-------Producto------No funcional (restriccion tecnologica)------Sistema
+          informacion del medicamento
+          o tratamiento
+
+
+
+
+
