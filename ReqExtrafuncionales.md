@@ -32,10 +32,29 @@ ID--------Requisito------Producto/Proyecto-----Funcional/No funcional-----Sistem
           registrar alergias o efectos 
           secundarios a tratamientos
 
-(MA9)-----El sistema permite buscar-------Producto------No funcional (restriccion tecnologica)------Sistema 
+(MA9)-----El sistema permite buscar--------Producto-----No funcional (restriccion tecnologica)------Sistema 
           informacion del medicamento 
           o tratamiento
 
-(MA10)----El sistema permite
+(MA10)----El sistema debe optener, con-----Producto-----No funcional (restriccion tecnologica)------Sistema
+          permisos, la ubicacion del
+          usuario
+
+(MA11)----El sistema debe mostrar la-------Producto-----No funcional (restriccion tecnologica)------Sistema
+          informacion de consultas
+          medicas
+
+(MA12)----El sistema debe mostrar la-------Producto-----No funcional (restriccion tecnologica)------Sistema
+          disponibilidad de consultas
+
+(MA13)----La app debe responder en 2-3-----Proyecto-----No funcional (restriccion tecnologica)------Software
+          segundos
+
+(MA14)----El sistema debe proteger los-----Producto-----No funcional (restriccion tecnologica)------Sistema
+          datos medicos del usuario
+
+(MA15)----El sistema debe permitir---------Proyecto-----Funcional---------Software
+          inicio de sesion para pacientes
+          o visitantes casuales
 
 ----------------------------------------------------------------------------------------------------------
