@@ -31,6 +31,7 @@ HU11---Dar acceso a informacion medica a otros---#22
 ##Responsabilidades del equipo:
 
 Integrante-----Rol-----Items de la rubrica a cargo
+
 Fabián--------Developer----Historias Usuario-CA/Requerimientos Extrafuncionales
 Gamboa
 
@@ -52,6 +53,7 @@ Pereira       Owner
 ##Catalogo Requerimientos Extrafuncionales:
 
 ID--------Requisito------Producto/Proyecto-----Funcional/No funcional-----Sistema/Software
+
 (MA1)-----El sistema debe permitir---------Producto-----Funcional---------Software
           registrar tratamientos medicos
           
