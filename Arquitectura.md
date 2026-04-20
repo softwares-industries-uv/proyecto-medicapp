@@ -2,20 +2,17 @@ Estilo adoptado: Cliente-Servidor
 
 Justificación basada en REF priorizados:
 
-REF ID: REF-01
-Descripción: El sistema debe enviar notificaciones de toma de medicamentos en menos de 2 segundos bajo condiciones de alta concurrencia (hasta 1000 usuarios activos simultáneos)
-Prioridad: Alta
-Como aborda el estilo: El servidor centraliza el procesamiento de alertas, permitiendo escalar la capacidad de envío sin depender de cada dispositivo cliente
+|   REF ID   | Prioridad | Descripción | Como aborda el estilo |
+|------------|-----------|-------------|-----------------------|
+|   REF 01   | Alta      | El sistema debe enviar notificaciones de toma de medicamentos en menos de 2 segundos bajo condiciones de alta concurrencia (hasta 1000 usuarios activos simultáneos) | Como aborda el estilo: El servidor centraliza el procesamiento de alertas, permitiendo escalar la capacidad de envío sin depender de cada dispositivo cliente |
 
-REF ID: REF-02
-Descripción: El sistema debe estar disponible el 99.9% del tiempo bajo operación normal, para garantizar que el acceso a recetas de emergencia no se vea interrumpido
-Prioridad: Alta
-Como aborda el estilo: La centralización en el servidor permite implementar redundancia, monitoreo y recuperación ante fallos de forma independiente al cliente
+|   REF ID   | Prioridad | Descripción | Como aborda el estilo |
+|------------|-----------|-------------|-----------------------|
+|   REF 02   | Alta      | El sistema debe estar disponible el 99.9% del tiempo bajo operación normal, para garantizar que el acceso a recetas de emergencia no se vea interrumpido | Como aborda el estilo: La centralización en el servidor permite implementar redundancia, monitoreo y recuperación ante fallos de forma independiente al cliente |
 
-REF ID: REF-03
-Descripción: Centralización de datos y fuente de verdad única para recetas médicas y pedidos de farmacia
-Prioridad: Alta
-Como aborda el estilo: El servidor actúa como única fuente de verdad, evitando duplicidad de datos entre dispositivos y garantizando consistencia en los registros médicos
+|   REF ID   | Prioridad | Descripción | Como aborda el estilo |
+|------------|-----------|-------------|-----------------------|
+|   REF 03   | Alta      | Centralización de datos y fuente de verdad única para recetas médicas y pedidos de farmacia | Como aborda el estilo: El servidor actúa como única fuente de verdad, evitando duplicidad de datos entre dispositivos y garantizando consistencia en los registros médicos |
 
 Explicación textual:
 
@@ -28,36 +25,38 @@ Este costo se acepta porque la integridad de las recetas médicas y la coordinac
 la cual se cubrirá parcialmente delegando los recordatorios básicos al almacenamiento local del móvil.
 
 Conexiones: Frontend → API (HTTPS/JSON) → Base de Datos (SQL/ORM)
+<img width="365" height="631" alt="WhatsApp Image 2026-04-19 at 9 09 30 PM" src="https://github.com/user-attachments/assets/814ab1a1-347b-44f6-a0de-55d128c00bea" />
+
 
 Fundamentación: Descomposición por dominio funcional, agrupando responsabilidades según las grandes funciones del sistema identificadas en el análisis de requerimientos.
 
-Módulo 1: Gestión de Tratamientos
+| Módulo 1                          | Gestión de Tratamientos                                                                                               |
+|-----------------------------------|-----------------------------------------------------------------------------------------------------------------------|
+| Responsabilidad                   | Administrar los horarios, dosis y adherencia de los medicamentos del paciente                                         |
+| Datos que maneja                  | Nombre del remedio, frecuencia, duración del tratamiento y registro de tomas realizadas                               |
+| Ofrece a otros módulos            | Estado de cumplimiento del paciente y disparadores de alertas para las tomas                                          |
+| Depende de                        | Módulo de Notificaciones (para disparar recordatorios), Módulo de Marketplace (para recibir actualizaciones de stock) |
 
-- Responsabilidad: Administrar los horarios, dosis y adherencia de los medicamentos del paciente
-- Datos que maneja: Nombre del remedio, frecuencia, duración del tratamiento y registro de tomas realizadas
-- Ofrece a otros módulos: Estado de cumplimiento del paciente y disparadores de alertas para las tomas
-- Depende de: Módulo de Notificaciones (para disparar recordatorios), Módulo de Marketplace (para recibir actualizaciones de stock).
+| Módulo 2                         | Marketplace y Farmacia                                                                 | 
+|----------------------------------|----------------------------------------------------------------------------------------|
+| Responsabilidad                  | Gestionar el catálogo de medicamentos, la compra y el despacho a domicilio             |
+| Datos que maneja                 | Inventario de farmacias, precios, direcciones de entrega y estado del repartidor       |
+| Ofrece a otros módulos           | Confirmación de compra y actualización de stock de medicamentos en el hogar            |
+| Depende de                       | Módulo de Gestión de Tratamientos (para registrar llegada de nuevas cajas de remedios) Módulo de Notificaciones (para avisar al paciente sobre el estado del despacho) |      
 
-Módulo 2: Marketplace y Farmacia
+| Módulo 3               | Telemedicina                                                                           |
+|------------------------|----------------------------------------------------------------------------------------|
+| Responsabilidad        | Gestionar la comunicación entre médicos y pacientes y la emisión de recetas            |
+| Datos que maneja       | Agenda de citas, perfiles médicos, historial de consultas y recetas digitales (PDF/QR) |
+| Ofrece a otros módulos | Nuevas recetas para automatizar la configuración del tratamiento                       |
+| Depende de             | Módulo de Gestión de Tratamientos (para revisar si el paciente ha seguido sus tomas antes de la cita), Módulo de Marketplace (para permitir la compra directa del medicamento recetado) |
 
-- Responsabilidad: Gestionar el catálogo de medicamentos, la compra y el despacho a domicilio
-- Datos que maneja: Inventario de farmacias, precios, direcciones de entrega y estado del repartidor
-- Ofrece a otros módulos: Confirmación de compra y actualización de stock de medicamentos en el hogar
-- Depende de: Módulo de Gestión de Tratamientos (para registrar llegada de nuevas cajas de remedios), Módulo de Notificaciones (para avisar al paciente sobre el estado del despacho)
-
-Módulo 3: Telemedicina
-
-- Responsabilidad: Gestionar la comunicación entre médicos y pacientes y la emisión de recetas
-- Datos que maneja: Agenda de citas, perfiles médicos, historial de consultas y recetas digitales (PDF/QR)
-- Ofrece a otros módulos: Nuevas recetas para automatizar la configuración del tratamiento
-- Depende de: Módulo de Gestión de Tratamientos (para revisar si el paciente ha seguido sus tomas antes de la cita), Módulo de Marketplace (para permitir la compra directa del medicamento recetado)
-
-Módulo 4: Notificaciones
-
-- Responsabilidad: Asegurar que las alertas críticas lleguen al usuario en el tiempo exacto
-- Datos que maneja: Tokens de dispositivo y cola de mensajes pendientes (Push/Locales)
-- Ofrece a otros módulos: Servicio de mensajería inmediata para recordatorios y avisos de entrega
-- Depende de: Módulo de Gestión de Tratamientos (recibe disparadores de recordatorio de tomas), Módulo de Marketplace (recibe avisos de estado del repartidor)
+| Módulo 4               | Notificaciones                                                           |
+|------------------------|--------------------------------------------------------------------------|
+| Responsabilidad        | Asegurar que las alertas críticas lleguen al usuario en el tiempo exacto |
+| Datos que maneja       | Tokens de dispositivo y cola de mensajes pendientes (Push/Locales)       |
+| Ofrece a otros módulos | Servicio de mensajería inmediata para recordatorios y avisos de entrega  |
+| Depende de             | Módulo de Gestión de Tratamientos (recibe disparadores de recordatorio de tomas), Módulo de Marketplace (recibe avisos de estado del repartidor) |
 
 Conexiones Principales entre Módulos:
 
