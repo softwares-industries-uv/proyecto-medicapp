@@ -1,5 +1,6 @@
 Proyecto MedicApp
 
+Lista 
 | ID   | Nombre                                    | Issue |
 |------|-------------------------------------------|-------|
 | HU01 | Consultar tratamiento o medicamento       |  #9   |
@@ -15,21 +16,18 @@ Proyecto MedicApp
 | HU11 | Dar acceso a informacion medica a otros   |  #22  |
 | HU12 | Poder registrarse en la app               |  #24  |
 | HU13 | Poder iniciar sesion en la app            |  #25  |
+
 ----------------------------------------------------------------------------------------------------------
 
-##Responsabilidades del equipo:
+Responsabilidades del equipo:
 
-Integrante--------------Rol-------------------Items de la rubrica a cargo
-
-Fabián Gamboa-----------Developer-------------Historias Usuario-CA/Requerimientos Extrafuncionales
-
-Sebastián Rodriguez-----Scrum Master----------Arquitectura del modelo
-
-Benjamin Quesada--------Developer-------------Arquitectura del modelo
-
-Antonella Canale-Mayet--Developer-------------Historias Usuario-CA
-
-Renato Pereira----------Product Owner---------Mockups del proyecto
+| Integrante             | Rol           | Items de la rubrica a cargo                          |
+|------------------------|---------------|------------------------------------------------------|
+| Fabián Gamboa          | Developer     | Historias Usuario-CA/Requerimientos Extrafuncionales |
+| Sebastián Rodriguez    | Scrum Master  | Arquitectura del modelo                              |
+| Benjamin Quesada       | Developer     | Arquitectura del modelo                              |
+| Antonella Canale-Mayet | Developer     | Historias Usuario-CA                                 |
+| Renato Pereira         | Product Owner | Mockups del proyecto                                 |
 
 ----------------------------------------------------------------------------------------------------------
 
