@@ -1,6 +1,6 @@
 Proyecto MedicApp
 
-Lista 
+Lista historias:
 | ID   | Nombre                                    | Issue |
 |------|-------------------------------------------|-------|
 | HU01 | Consultar tratamiento o medicamento       |  #9   |
