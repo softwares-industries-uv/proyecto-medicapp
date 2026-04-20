@@ -1,5 +1,5 @@
-# Proyecto MedicApp
-##Lista historias:
+Proyecto MedicApp
+Lista historias:
 
 ID-----Nombre------Issue
 
@@ -37,17 +37,17 @@ Integrante--------------Rol-------------------Items de la rubrica a cargo
 
 Fabián Gamboa-----------Developer-------------Historias Usuario-CA/Requerimientos Extrafuncionales
 
-Sebastián Rodriguez-----Scrum Master----------
+Sebastián Rodriguez-----Scrum Master----------Arquitectura del modelo
 
-Benjamin Quesada--------Developer-------------
+Benjamin Quesada--------Developer-------------Arquitectura del modelo
 
 Antonella Canale-Mayet--Developer-------------Historias Usuario-CA
 
-Renato Pereira----------Product Owner---------
+Renato Pereira----------Product Owner---------Mockups del proyecto
 
 ----------------------------------------------------------------------------------------------------------
 
-##Descripcion del sistema:
+Descripcion del sistema:
 
 MedicApp
 
