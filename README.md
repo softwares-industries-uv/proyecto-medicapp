@@ -18,7 +18,7 @@ Lista historias:
 | HU13 | Ver cumplimiento tratamiento del paciente             |  #27  |
 | HU14 | Poder registrarse en la app como medico               |  #28  |
 | HU15 | Poder iniciar sesion en la app como medico            |  #29  |
-| HU16 | Registrar tratamiento medico                          |  #30  |
+| HU16 | Acceder al perfil del paciente                        |  #30  |
 
 ----------------------------------------------------------------------------------------------------------
 
