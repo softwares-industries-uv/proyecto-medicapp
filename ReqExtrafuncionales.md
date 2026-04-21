@@ -17,5 +17,8 @@ Catalogo Requerimientos Extrafuncionales:
 | (MA13) | La app debe responder en 2-3 segundos | Proyecto | No funcional (restriccion tecnologica) | Software |
 | (MA14) | El sistema debe proteger los datos medicos del paciente, familiar o medico  | Producto | No funcional (restriccion tecnologica) | Sistema |
 | (MA15) | El sistema debe permitir inicio de sesion o registracion para pacientes o visitantes casuales | Proyecto | Funcional | Software |
+| (MA16) | El sistema debe tener un calendario donde se pueda agendar uso de medicamentos y futuros usos de los mismos | Producto | Funcional | Software |
+| (MA17) | El sistema tiene chat para estar que el paciente este en contacto con sus familiares | Producto | Funcional | Software | 
+
 
 ----------------------------------------------------------------------------------------------------------
