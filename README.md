@@ -1,23 +1,24 @@
 Proyecto MedicApp
 
 Lista historias:
-| ID   | Nombre                                    | Issue |
-|------|-------------------------------------------|-------|
-| HU01 | Consultar tratamiento o medicamento       |  #9   |
-| HU02 | Ver indicaciones o efectos secundarios    |  #10  |
-| HU03 | Registrar Duracion tratamiento            |  #12  |
-| HU04 | Recibir recordatorios o notificaciones    |  #13  |
-| HU05 | Ver stock y medicamentos registrados      |  #14  |
-| HU06 | Ver el historial de medicamentos y dosis  |  #16  |
-| HU07 | Registrar alergias/efectos al medicamento |  #17  |
-| HU08 | Ver estado de salud del paciente          |  #18  |
-| HU09 | Ver disponibilidad en hospitales/clinicas |  #20  |
-| HU10 | Informacion sobre consulta medica         |  #21  |
-| HU11 | Dar acceso a informacion medica a otros   |  #22  |
-| HU12 | Poder registrarse en la app               |  #24  |
-| HU13 | Poder iniciar sesion en la app            |  #25  |
-| HU14 | Editar duracion del tratamiento           |  #26  |
-| HU15 | Ver cumplimiento tratamiento del paciente |  #27  |
+| ID   | Nombre                                                | Issue |
+|------|-------------------------------------------------------|-------|
+| HU01 | Registrar Duracion tratamiento                        |  #12  |
+| HU02 | Recibir recordatorios o notificaciones                |  #13  |
+| HU03 | Ver stock y medicamentos registrados                  |  #14  |
+| HU04 | Ver el historial de medicamentos y dosis              |  #16  |
+| HU05 | Registrar alergias/efectos al medicamento             |  #17  |
+| HU06 | Ver estado de salud del paciente                      |  #18  |
+| HU07 | Ver disponibilidad en hospitales/clinicas             |  #20  |
+| HU08 | Informacion sobre consulta medica                     |  #21  |
+| HU09 | Dar acceso a informacion medica a otros               |  #22  |
+| HU10 | Poder registrarse en la app como usuario              |  #24  |
+| HU11 | Poder iniciar sesion en la app como usuario           |  #25  |
+| HU12 | Editar duracion del tratamiento                       |  #26  |
+| HU13 | Ver cumplimiento tratamiento del paciente             |  #27  |
+| HU14 | Poder registrarse en la app como medico               |  #28  |
+| HU15 | Poder iniciar sesion en la app como medico            |  #29  |
+| HU16 | Registrar tratamiento medico                          |  #30  |
 
 ----------------------------------------------------------------------------------------------------------
 
