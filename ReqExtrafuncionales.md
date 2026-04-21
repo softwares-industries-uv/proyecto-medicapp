@@ -15,7 +15,7 @@ Catalogo Requerimientos Extrafuncionales:
 | (MA11) | El sistema debe mostrar la informacion de consultas medicas | Producto | No funcional (restriccion tecnologica) | Sistema |
 | (MA12) | El sistema debe mostrar la disponibilidad de consultas | Producto | No funcional (restriccion tecnologica) | Sistema |
 | (MA13) | La app debe responder en 2-3 segundos | Proyecto | No funcional (restriccion tecnologica) | Software |
-| (MA14) | El sistema debe proteger los datos medicos del usuario  | Producto | No funcional (restriccion tecnologica) | Sistema |
+| (MA14) | El sistema debe proteger los datos medicos del paciente, familiar o medico  | Producto | No funcional (restriccion tecnologica) | Sistema |
 | (MA15) | El sistema debe permitir inicio de sesion o registracion para pacientes o visitantes casuales | Proyecto | Funcional | Software |
 
 ----------------------------------------------------------------------------------------------------------
