@@ -10,12 +10,12 @@ Catalogo Requerimientos Extrafuncionales:
 | (MA6)  | El sistema debe notificar cuando queden 5 o menos unidades | Producto | Funcional | Software | 
 | (MA7)  | El sistema debe permitir buscar hospitales o clinicas cercanas | Producto | No funcional (restriccion tecnologica) | Sistema |      
 | (MA8)  | El sistema debe permitir registrar alergias o efectos secundarios a tratamientos | Producto | Funcional | Software |
-| (MA9)  | El sistema permite buscar informacion del medicamento o tratamiento | Producto | No funcional (restriccion tecnologica) | Sistema |
+| (MA9)  | El sistema debe tener inicio de sesion y registracion para profesionales en la salud | Producto | No funcional (restriccion tecnologica) | Sistema |
 | (MA10) | El sistema debe optener, con permisos, la ubicacion del usuario | Producto | No funcional (restriccion tecnologica) | Sistema |
 | (MA11) | El sistema debe mostrar la informacion de consultas medicas | Producto | No funcional (restriccion tecnologica) | Sistema |
 | (MA12) | El sistema debe mostrar la disponibilidad de consultas | Producto | No funcional (restriccion tecnologica) | Sistema |
 | (MA13) | La app debe responder en 2-3 segundos | Proyecto | No funcional (restriccion tecnologica) | Software |
 | (MA14) | El sistema debe proteger los datos medicos del usuario  | Producto | No funcional (restriccion tecnologica) | Sistema |
-| (MA15) | El sistema debe permitir inicio de sesion para pacientes o visitantes casuales | Proyecto | Funcional | Software |
+| (MA15) | El sistema debe permitir inicio de sesion o registracion para pacientes o visitantes casuales | Proyecto | Funcional | Software |
 
 ----------------------------------------------------------------------------------------------------------
