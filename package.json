@@ -1,0 +1,25 @@
+{
+  "name": "proyecto-medicapp",
+  "version": "1.0.0",
+  "description": "Proyecto MedicApp",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/softwares-industries-uv/proyecto-medicapp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/softwares-industries-uv/proyecto-medicapp/issues"
+  },
+  "homepage": "https://github.com/softwares-industries-uv/proyecto-medicapp#readme",
+  "dependencies": {
+    "better-sqlite3": "^12.10.0",
+    "express": "^5.2.1"
+  }
+}
