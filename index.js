@@ -9,21 +9,29 @@ app.use(express.json());
 const swaggerSpec = swaggerJsdoc({
   definition: {
     openapi: '3.0.0',
-    info: { title: 'API Cursos', version: '1.0.0',
-            description: 'API para gestionar cursos academicos' }
+    info: { 
+      title: 'API Cursos', 
+      version: '1.0.0',
+      description: 'API para gestionar cursos academicos' 
+    },
+    servers: [
+      { url: 'https://proyecto-medicapp.onrender.com', description: 'Produccion' },
+      { url: 'http://localhost:3000', description: 'Local' }
+    ]
   },
   apis: ['./index.js']
 });
+
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 /**
  * @swagger
  * /cursos:
- *   get:
- *     summary: Lista todos los cursos
- *     responses:
- *       200:
- *         description: Array de cursos
+ * get:
+ * summary: Lista todos los cursos
+ * responses:
+ * 200:
+ * description: Array de cursos
  */
 app.get('/cursos', (req, res) => {
   res.json(db.prepare('SELECT * FROM cursos').all());
@@ -32,21 +40,21 @@ app.get('/cursos', (req, res) => {
 /**
  * @swagger
  * /cursos:
- *   post:
- *     summary: Crea un nuevo curso
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               nombre:     { type: string }
- *               instructor: { type: string }
- *               creditos:   { type: integer }
- *     responses:
- *       201:
- *         description: Curso creado
+ * post:
+ * summary: Crea un nuevo curso
+ * requestBody:
+ * required: true
+ * content:
+ * application/json:
+ * schema:
+ * type: object
+ * properties:
+ * nombre:     { type: string }
+ * instructor: { type: string }
+ * creditos:   { type: integer }
+ * responses:
+ * 201:
+ * description: Curso creado
  */
 app.post('/cursos', (req, res) => {
   const { nombre, instructor, creditos } = req.body;
@@ -59,28 +67,28 @@ app.post('/cursos', (req, res) => {
 /**
  * @swagger
  * /cursos/{id}:
- *   put:
- *     summary: Modifica un curso
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema: { type: integer }
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               nombre:     { type: string }
- *               instructor: { type: string }
- *               creditos:   { type: integer }
- *     responses:
- *       200:
- *         description: Curso actualizado
- *       404:
- *         description: No encontrado
+ * put:
+ * summary: Modifica un curso
+ * parameters:
+ * - in: path
+ * name: id
+ * required: true
+ * schema: { type: integer }
+ * requestBody:
+ * required: true
+ * content:
+ * application/json:
+ * schema:
+ * type: object
+ * properties:
+ * nombre:     { type: string }
+ * instructor: { type: string }
+ * creditos:   { type: integer }
+ * responses:
+ * 200:
+ * description: Curso actualizado
+ * 404:
+ * description: No encontrado
  */
 app.put('/cursos/:id', (req, res) => {
   const { nombre, instructor, creditos } = req.body;
@@ -94,18 +102,18 @@ app.put('/cursos/:id', (req, res) => {
 /**
  * @swagger
  * /cursos/{id}:
- *   delete:
- *     summary: Elimina un curso
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema: { type: integer }
- *     responses:
- *       200:
- *         description: Curso eliminado
- *       404:
- *         description: No encontrado
+ * delete:
+ * summary: Elimina un curso
+ * parameters:
+ * - in: path
+ * name: id
+ * required: true
+ * schema: { type: integer }
+ * responses:
+ * 200:
+ * description: Curso eliminado
+ * 404:
+ * description: No encontrado
  */
 app.delete('/cursos/:id', (req, res) => {
   const i = db.prepare('DELETE FROM cursos WHERE id=?').run(req.params.id);
