@@ -6,18 +6,16 @@ const swaggerJsdoc = require('swagger-jsdoc');
 const app = express();
 app.use(express.json());
 
+// Configuración básica limpia para evitar errores de lectura
 const swaggerSpec = swaggerJsdoc({
   definition: {
     openapi: '3.0.0',
     info: { 
       title: 'MedicApp API', 
       version: '1.0.0',
-      description: 'API para la gestión de medicamentos y registros de salud del paciente' 
+      description: 'API de MedicApp' 
     },
-    servers: [
-      { url: 'https://proyecto-medicapp.onrender.com', description: 'Produccion (Render)' },
-      { url: 'http://localhost:3000', description: 'Local' }
-    ]
+    servers: [{ url: 'https://proyecto-medicapp.onrender.com' }]
   },
   apis: ['./index.js']
 });
@@ -28,10 +26,10 @@ app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
  * @swagger
  * /efectos:
  * get:
- * summary: Criterio 3 - Muestra la lista de efectos secundarios guardados en el historial
+ * summary: Listar efectos
  * responses:
  * 200:
- * description: Lista de efectos secundarios registrados por el paciente
+ * description: OK
  */
 app.get('/efectos', (req, res) => {
   res.json(db.prepare('SELECT * FROM efectos_secundarios ORDER BY fecha_registro DESC').all());
@@ -41,93 +39,49 @@ app.get('/efectos', (req, res) => {
  * @swagger
  * /efectos:
  * post:
- * summary: Criterio 1 - Registra un medicamento y su reacción adversa
+ * summary: Crear efecto
  * requestBody:
  * required: true
  * content:
  * application/json:
  * schema:
  * type: object
- * required:
- * - medicamento
- * - reaccion
  * properties:
- * medicamento: { type: string, example: "Ibuprofeno" }
- * reaccion:    { type: string, example: "Gastritis severa y ronchas en la piel" }
+ * medicamento: { type: string }
+ * reaccion: { type: string }
  * responses:
  * 201:
- * description: Efecto secundario guardado exitosamente en el historial
+ * description: Creado
  */
 app.post('/efectos', (req, res) => {
   const { medicamento, reaccion } = req.body;
+  if (!medicamento || !reaccion) return res.status(400).json({ error: 'Campos obligatorios' });
   
-  if (!medicamento || !reaccion) {
-    return res.status(400).json({ error: 'El nombre del medicamento y la reacción son obligatorios' });
-  }
-
-  const r = db.prepare(
-    'INSERT INTO efectos_secundarios (medicamento, reaccion) VALUES (?, ?)'
-  ).run(medicamento, reaccion);
-  
-  res.status(201).json({ 
-    id: r.lastInsertRowid, 
-    medicamento, 
-    reaccion,
-    mensaje: 'Registro guardado en el historial' 
-  });
+  const r = db.prepare('INSERT INTO efectos_secundarios (medicamento, reaccion) VALUES (?, ?)').run(medicamento, reaccion);
+  res.status(201).json({ id: r.lastInsertRowid, medicamento, reaccion });
 });
 
 /**
  * @swagger
  * /efectos/verificar/{nombreMedicamento}:
  * get:
- * summary: Criterio 2 - Verifica si un medicamento tiene riesgos antes de asociarlo en otra funcionalidad
+ * summary: Verificar medicamento
  * parameters:
  * - in: path
  * name: nombreMedicamento
  * required: true
- * schema: { type: string }
+ * schema:
+ * type: string
  * responses:
  * 200:
- * description: Devuelve si el medicamento es peligroso o seguro basado en el historial
+ * description: OK
  */
 app.get('/efectos/verificar/:nombreMedicamento', (req, res) => {
-  const { nombreMedicamento } = req.params;
-  
-  const registro = db.prepare(
-    'SELECT * FROM efectos_secundarios WHERE UPPER(medicamento) = UPPER(?)'
-  ).get(nombreMedicamento);
-
+  const registro = db.prepare('SELECT * FROM efectos_secundarios WHERE UPPER(medicamento) = UPPER(?)').get(req.params.nombreMedicamento);
   if (registro) {
-    return res.json({ 
-      riesgo: true, 
-      advertencia: `⚠️ ADVERTENCIA: Este medicamento ya registró un efecto secundario previo (${registro.reaccion}). Evite su uso.` 
-    });
+    return res.json({ riesgo: true, advertencia: `⚠️ ADVERTENCIA: Efecto previo (${registro.reaccion}).` });
   }
-
-  res.json({ riesgo: false, mensaje: 'No hay registros de efectos secundarios para este medicamento.' });
+  res.json({ riesgo: false, mensaje: 'Seguro.' });
 });
 
-/**
- * @swagger
- * /efectos/{id}:
- * delete:
- * summary: Elimina un registro del historial de efectos secundarios
- * parameters:
- * - in: path
- * name: id
- * required: true
- * schema: { type: integer }
- * responses:
- * 200:
- * description: Registro eliminado correctamente
- * 404:
- * description: Registro no encontrado
- */
-app.delete('/efectos/:id', (req, res) => {
-  const i = db.prepare('DELETE FROM efectos_secundarios WHERE id=?').run(req.params.id);
-  if (i.changes === 0) return res.status(404).json({ error: 'Registro no encontrado' });
-  res.json({ mensaje: 'Registro de efecto secundario eliminado' });
-});
-
-app.listen(3000, () => console.log('MedicApp API corriendo en http://localhost:3000'));
+app.listen(3000, () => console.log('Servidor corriendo'));
