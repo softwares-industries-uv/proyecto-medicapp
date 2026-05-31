@@ -1,12 +1,14 @@
 const Database = require('better-sqlite3');
-const db = new Database('datos.db');
+const db = new Database('medicapp.db');
 
-db.exec(`
-  CREATE TABLE IF NOT EXISTS cursos (
-    id         INTEGER PRIMARY KEY AUTOINCREMENT,
-    nombre     TEXT NOT NULL,
-    instructor TEXT NOT NULL,
-    creditos   INTEGER NOT NULL
+// Creamos la tabla adaptada a la historia de usuario
+db.prepare(`
+  CREATE TABLE IF NOT EXISTS efectos_secundarios (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    medicamento TEXT NOT NULL,
+    reaccion TEXT NOT NULL,
+    fecha_registro DATETIME DEFAULT CURRENT_TIMESTAMP
   )
-`);
+`).run();
+
 module.exports = db;

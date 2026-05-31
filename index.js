@@ -10,12 +10,12 @@ const swaggerSpec = swaggerJsdoc({
   definition: {
     openapi: '3.0.0',
     info: { 
-      title: 'API Cursos', 
+      title: 'MedicApp API', 
       version: '1.0.0',
-      description: 'API para gestionar cursos academicos' 
+      description: 'API para la gestión de medicamentos y registros de salud del paciente' 
     },
     servers: [
-      { url: 'https://proyecto-medicapp.onrender.com', description: 'Produccion' },
+      { url: 'https://proyecto-medicapp.onrender.com', description: 'Produccion (Render)' },
       { url: 'http://localhost:3000', description: 'Local' }
     ]
   },
@@ -26,84 +26,93 @@ app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 /**
  * @swagger
- * /cursos:
+ * /efectos:
  * get:
- * summary: Lista todos los cursos
+ * summary: Criterio 3 - Muestra la lista de efectos secundarios guardados en el historial
  * responses:
  * 200:
- * description: Array de cursos
+ * description: Lista de efectos secundarios registrados por el paciente
  */
-app.get('/cursos', (req, res) => {
-  res.json(db.prepare('SELECT * FROM cursos').all());
+app.get('/efectos', (req, res) => {
+  res.json(db.prepare('SELECT * FROM efectos_secundarios ORDER BY fecha_registro DESC').all());
 });
 
 /**
  * @swagger
- * /cursos:
+ * /efectos:
  * post:
- * summary: Crea un nuevo curso
+ * summary: Criterio 1 - Registra un medicamento y su reacción adversa
  * requestBody:
  * required: true
  * content:
  * application/json:
  * schema:
  * type: object
+ * required:
+ * - medicamento
+ * - reaccion
  * properties:
- * nombre:     { type: string }
- * instructor: { type: string }
- * creditos:   { type: integer }
+ * medicamento: { type: string, example: "Ibuprofeno" }
+ * reaccion:    { type: string, example: "Gastritis severa y ronchas en la piel" }
  * responses:
  * 201:
- * description: Curso creado
+ * description: Efecto secundario guardado exitosamente en el historial
  */
-app.post('/cursos', (req, res) => {
-  const { nombre, instructor, creditos } = req.body;
+app.post('/efectos', (req, res) => {
+  const { medicamento, reaccion } = req.body;
+  
+  if (!medicamento || !reaccion) {
+    return res.status(400).json({ error: 'El nombre del medicamento y la reacción son obligatorios' });
+  }
+
   const r = db.prepare(
-    'INSERT INTO cursos (nombre, instructor, creditos) VALUES (?, ?, ?)'
-  ).run(nombre, instructor, creditos);
-  res.status(201).json({ id: r.lastInsertRowid, nombre, instructor, creditos });
+    'INSERT INTO efectos_secundarios (medicamento, reaccion) VALUES (?, ?)'
+  ).run(medicamento, reaccion);
+  
+  res.status(201).json({ 
+    id: r.lastInsertRowid, 
+    medicamento, 
+    reaccion,
+    mensaje: 'Registro guardado en el historial' 
+  });
 });
 
 /**
  * @swagger
- * /cursos/{id}:
- * put:
- * summary: Modifica un curso
+ * /efectos/verificar/{nombreMedicamento}:
+ * get:
+ * summary: Criterio 2 - Verifica si un medicamento tiene riesgos antes de asociarlo en otra funcionalidad
  * parameters:
  * - in: path
- * name: id
+ * name: nombreMedicamento
  * required: true
- * schema: { type: integer }
- * requestBody:
- * required: true
- * content:
- * application/json:
- * schema:
- * type: object
- * properties:
- * nombre:     { type: string }
- * instructor: { type: string }
- * creditos:   { type: integer }
+ * schema: { type: string }
  * responses:
  * 200:
- * description: Curso actualizado
- * 404:
- * description: No encontrado
+ * description: Devuelve si el medicamento es peligroso o seguro basado en el historial
  */
-app.put('/cursos/:id', (req, res) => {
-  const { nombre, instructor, creditos } = req.body;
-  const i = db.prepare(
-    'UPDATE cursos SET nombre=?, instructor=?, creditos=? WHERE id=?'
-  ).run(nombre, instructor, creditos, req.params.id);
-  if (i.changes === 0) return res.status(404).json({ error: 'Curso no encontrado' });
-  res.json({ mensaje: 'Curso actualizado' });
+app.get('/efectos/verificar/:nombreMedicamento', (req, res) => {
+  const { nombreMedicamento } = req.params;
+  
+  const registro = db.prepare(
+    'SELECT * FROM efectos_secundarios WHERE UPPER(medicamento) = UPPER(?)'
+  ).get(nombreMedicamento);
+
+  if (registro) {
+    return res.json({ 
+      riesgo: true, 
+      advertencia: `⚠️ ADVERTENCIA: Este medicamento ya registró un efecto secundario previo (${registro.reaccion}). Evite su uso.` 
+    });
+  }
+
+  res.json({ riesgo: false, mensaje: 'No hay registros de efectos secundarios para este medicamento.' });
 });
 
 /**
  * @swagger
- * /cursos/{id}:
+ * /efectos/{id}:
  * delete:
- * summary: Elimina un curso
+ * summary: Elimina un registro del historial de efectos secundarios
  * parameters:
  * - in: path
  * name: id
@@ -111,14 +120,14 @@ app.put('/cursos/:id', (req, res) => {
  * schema: { type: integer }
  * responses:
  * 200:
- * description: Curso eliminado
+ * description: Registro eliminado correctamente
  * 404:
- * description: No encontrado
+ * description: Registro no encontrado
  */
-app.delete('/cursos/:id', (req, res) => {
-  const i = db.prepare('DELETE FROM cursos WHERE id=?').run(req.params.id);
-  if (i.changes === 0) return res.status(404).json({ error: 'Curso no encontrado' });
-  res.json({ mensaje: 'Curso eliminado' });
+app.delete('/efectos/:id', (req, res) => {
+  const i = db.prepare('DELETE FROM efectos_secundarios WHERE id=?').run(req.params.id);
+  if (i.changes === 0) return res.status(404).json({ error: 'Registro no encontrado' });
+  res.json({ mensaje: 'Registro de efecto secundario eliminado' });
 });
 
-app.listen(3000, () => console.log('API en http://localhost:3000'));
+app.listen(3000, () => console.log('MedicApp API corriendo en http://localhost:3000'));
