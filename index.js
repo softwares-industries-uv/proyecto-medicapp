@@ -1,87 +1,88 @@
 const express      = require('express');
 const db           = require('./db');
 const swaggerUi    = require('swagger-ui-express');
-const swaggerJsdoc = require('swagger-jsdoc');
 
 const app = express();
 app.use(express.json());
 
-// Configuración básica limpia para evitar errores de lectura
-const swaggerSpec = swaggerJsdoc({
-  definition: {
-    openapi: '3.0.0',
-    info: { 
-      title: 'MedicApp API', 
-      version: '1.0.0',
-      description: 'API de MedicApp' 
-    },
-    servers: [{ url: 'https://proyecto-medicapp.onrender.com' }]
+// JSON directo con la configuración de Swagger (Cero comentarios mañosos)
+const swaggerDocument = {
+  openapi: "3.0.0",
+  info: {
+    title: "MedicApp API",
+    version: "1.0.0",
+    description: "API para la gestión de medicamentos y registros de salud del paciente"
   },
-  apis: ['./index.js']
-});
+  servers: [
+    { url: "https://proyecto-medicapp.onrender.com" }
+  ],
+  paths: {
+    "/efectos": {
+      "get": {
+        "summary": "Muestra la lista de efectos secundarios guardados en el historial",
+        "responses": {
+          "200": { "description": "Lista de efectos devuelta con éxito" }
+        }
+      },
+      "post": {
+        "summary": "Registra un medicamento y su reacción adversa",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "medicamento": { "type": "string", "example": "Ibuprofeno" },
+                  "reaccion": { "type": "string", "example": "Gastritis severa" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Registro guardado" }
+        }
+      }
+    },
+    "/efectos/verificar/{nombreMedicamento}": {
+      "get": {
+        "summary": "Verifica si un medicamento tiene riesgos registrados",
+        "parameters": [
+          { "name": "nombreMedicamento", "in": "path", "required": true, "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "200": { "description": "Verificación completada" }
+        }
+      }
+    }
+  }
+};
 
-app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+// Servimos la documentación usando el objeto directo
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-/**
- * @swagger
- * /efectos:
- * get:
- * summary: Listar efectos
- * responses:
- * 200:
- * description: OK
- */
+// ---- RUTAS LÓGICAS DE TU APLICACIÓN ----
+
 app.get('/efectos', (req, res) => {
   res.json(db.prepare('SELECT * FROM efectos_secundarios ORDER BY fecha_registro DESC').all());
 });
 
-/**
- * @swagger
- * /efectos:
- * post:
- * summary: Crear efecto
- * requestBody:
- * required: true
- * content:
- * application/json:
- * schema:
- * type: object
- * properties:
- * medicamento: { type: string }
- * reaccion: { type: string }
- * responses:
- * 201:
- * description: Creado
- */
 app.post('/efectos', (req, res) => {
   const { medicamento, reaccion } = req.body;
-  if (!medicamento || !reaccion) return res.status(400).json({ error: 'Campos obligatorios' });
-  
+  if (!medicamento || !reaccion) {
+    return res.status(400).json({ error: 'El nombre del medicamento y la reacción son obligatorios' });
+  }
   const r = db.prepare('INSERT INTO efectos_secundarios (medicamento, reaccion) VALUES (?, ?)').run(medicamento, reaccion);
-  res.status(201).json({ id: r.lastInsertRowid, medicamento, reaccion });
+  res.status(201).json({ id: r.lastInsertRowid, medicamento, reaccion, mensaje: 'Registro guardado en el historial' });
 });
 
-/**
- * @swagger
- * /efectos/verificar/{nombreMedicamento}:
- * get:
- * summary: Verificar medicamento
- * parameters:
- * - in: path
- * name: nombreMedicamento
- * required: true
- * schema:
- * type: string
- * responses:
- * 200:
- * description: OK
- */
 app.get('/efectos/verificar/:nombreMedicamento', (req, res) => {
   const registro = db.prepare('SELECT * FROM efectos_secundarios WHERE UPPER(medicamento) = UPPER(?)').get(req.params.nombreMedicamento);
   if (registro) {
-    return res.json({ riesgo: true, advertencia: `⚠️ ADVERTENCIA: Efecto previo (${registro.reaccion}).` });
+    return res.json({ riesgo: true, advertencia: `⚠️ ADVERTENCIA: Este medicamento ya registró un efecto secundario previo (${registro.reaccion}). Evite su uso.` });
   }
-  res.json({ riesgo: false, mensaje: 'Seguro.' });
+  res.json({ riesgo: false, mensaje: 'No hay registros de efectos secundarios para este medicamento.' });
 });
 
-app.listen(3000, () => console.log('Servidor corriendo'));
+app.listen(3000, () => console.log('MedicApp API corriendo con éxito'));
