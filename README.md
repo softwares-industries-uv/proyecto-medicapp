@@ -51,3 +51,14 @@ o al publico en general, las funcionalidades de MedicApp son:
 - Busqueda de informacion sobre distintos medicamentos: Se incluye busqueda de informacion del medicamento que sean relevantes para un uso informado y seguro
 
 ----------------------------------------------------------------------------------------------------------
+
+Responsabilidades del equipo (Actualización):
+
+| Integrante             | Rol           | Items de la rubrica a cargo                          |
+|------------------------|---------------|------------------------------------------------------|
+| Fabián Gamboa          | Developer     | Historias usuario y Clarita Review                   |
+| Sebastián Rodriguez    | Scrum Master  | Github Workflow y Revisión                           |
+| Benjamin Quesada       | Developer     | APIs y Thunder Client                                |
+| Renato Pereira         | Product Owner | Revisión de cambios                                  |
+
+----------------------------------------------------------------------------------------------------------
