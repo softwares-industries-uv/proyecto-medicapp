@@ -5,27 +5,26 @@ const swaggerUi    = require('swagger-ui-express');
 const app = express();
 app.use(express.json());
 
-// JSON directo con la configuración de Swagger (Cero comentarios mañosos)
+// Documentación JSON Plana (Cero riesgo de colapso en Render)
 const swaggerDocument = {
   openapi: "3.0.0",
   info: {
-    title: "MedicApp API",
-    version: "1.0.0",
-    description: "API para la gestión de medicamentos y registros de salud del paciente"
+    title: "MedicApp API - Control Médico y Paciente",
+    version: "2.0.0",
+    description: "API para HU #17 (Efectos Secundarios) y HU #30 (Gestión de Perfil por Médicos)"
   },
-  servers: [
-    { url: "https://proyecto-medicapp.onrender.com" }
-  ],
+  servers: [{ url: "https://proyecto-medicapp.onrender.com" }],
   paths: {
-    "/efectos": {
+    "/pacientes/{id}": {
       "get": {
-        "summary": "Muestra la lista de efectos secundarios guardados en el historial",
-        "responses": {
-          "200": { "description": "Lista de efectos devuelta con éxito" }
-        }
-      },
+        "summary": "HU #30 - Médico accede al perfil del paciente para ver su info",
+        "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } }],
+        "responses": { "200": { "description": "Perfil del paciente e historial clínico devuelto" } }
+      }
+    },
+    "/historial": {
       "post": {
-        "summary": "Registra un medicamento y su reacción adversa",
+        "summary": "HU #30 - Médico ingresa y guarda información médica en el historial",
         "requestBody": {
           "required": true,
           "content": {
@@ -33,6 +32,29 @@ const swaggerDocument = {
               "schema": {
                 "type": "object",
                 "properties": {
+                  "paciente_id": { "type": "integer", "example": 1 },
+                  "medico_id": { "type": "integer", "example": 99 },
+                  "diagnostico": { "type": "string", "example": "Hipertensión Arterial" },
+                  "observaciones": { "type": "string", "example": "Se sugiere suspender Ibuprofeno por reacciones" }
+                }
+              }
+            }
+          }
+        },
+        "responses": { "201": { "description": "Historial registrado correctamente" } }
+      }
+    },
+    "/efectos": {
+      "post": {
+        "summary": "HU #17 - Paciente registra un efecto secundario",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "paciente_id": { "type": "integer", "example": 1 },
                   "medicamento": { "type": "string", "example": "Ibuprofeno" },
                   "reaccion": { "type": "string", "example": "Gastritis severa" }
                 }
@@ -40,49 +62,67 @@ const swaggerDocument = {
             }
           }
         },
-        "responses": {
-          "201": { "description": "Registro guardado" }
-        }
+        "responses": { "201": { "description": "Efecto secundario guardado en el historial" } }
       }
     },
-    "/efectos/verificar/{nombreMedicamento}": {
+    "/efectos/paciente/{paciente_id}": {
       "get": {
-        "summary": "Verifica si un medicamento tiene riesgos registrados",
-        "parameters": [
-          { "name": "nombreMedicamento", "in": "path", "required": true, "schema": { "type": "string" } }
-        ],
-        "responses": {
-          "200": { "description": "Verificación completada" }
-        }
+        "summary": "HU #17 - Accede a la lista de efectos secundarios del paciente",
+        "parameters": [{ "name": "paciente_id", "in": "path", "required": true, "schema": { "type": "integer" } }],
+        "responses": { "200": { "description": "Lista de efectos secundarios" } }
       }
     }
   }
 };
 
-// Servimos la documentación usando el objeto directo
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-// ---- RUTAS LÓGICAS DE TU APLICACIÓN ----
+// ================= LÓGICA DE LAS HISTORIAS DE USUARIO =================
 
-app.get('/efectos', (req, res) => {
-  res.json(db.prepare('SELECT * FROM efectos_secundarios ORDER BY fecha_registro DESC').all());
+// HU #30: GET - Visualizar perfil e información completa del paciente
+app.get('/pacientes/:id', (req, res) => {
+  const paciente = db.prepare('SELECT * FROM pacientes WHERE id = ?').get(req.params.id);
+  if (!paciente) return res.status(404).json({ error: 'Paciente no encontrado' });
+
+  // Buscamos también sus antecedentes agregados por doctores y sus efectos registrados
+  const historial = db.prepare('SELECT * FROM historial_medico WHERE paciente_id = ?').all(paciente.id);
+  const efectos = db.prepare('SELECT * FROM efectos_secundarios WHERE paciente_id = ?').all(paciente.id);
+
+  res.json({ infoPersonal: paciente, historialClinico: historial, alertasEfectos: efectos });
 });
 
+// HU #30: POST - Médico guarda registro en el historial clínico
+app.post('/historial', (req, res) => {
+  const { paciente_id, medico_id, diagnostico, observaciones } = req.body;
+  if (!paciente_id || !medico_id || !diagnostico) {
+    return res.status(400).json({ error: 'Faltan datos obligatorios para el registro clínico' });
+  }
+
+  const r = db.prepare(
+    'INSERT INTO historial_medico (paciente_id, medico_id, diagnostico, observaciones) VALUES (?, ?, ?, ?)'
+  ).run(paciente_id, medico_id, diagnostico, observaciones);
+
+  res.status(201).json({ id: r.lastInsertRowid, mensaje: 'Historial médico registrado correctamente' });
+});
+
+// HU #17: POST - Paciente registra efecto secundario
 app.post('/efectos', (req, res) => {
-  const { medicamento, reaccion } = req.body;
-  if (!medicamento || !reaccion) {
-    return res.status(400).json({ error: 'El nombre del medicamento y la reacción son obligatorios' });
+  const { paciente_id, medicamento, reaccion } = req.body;
+  if (!paciente_id || !medicamento || !reaccion) {
+    return res.status(400).json({ error: 'Todos los campos son obligatorios' });
   }
-  const r = db.prepare('INSERT INTO efectos_secundarios (medicamento, reaccion) VALUES (?, ?)').run(medicamento, reaccion);
-  res.status(201).json({ id: r.lastInsertRowid, medicamento, reaccion, mensaje: 'Registro guardado en el historial' });
+
+  const r = db.prepare(
+    'INSERT INTO efectos_secundarios (paciente_id, medicamento, reaccion) VALUES (?, ?, ?)'
+  ).run(paciente_id, medicamento, reaccion);
+
+  res.status(201).json({ id: r.lastInsertRowid, mensaje: 'Efecto secundario guardado en el historial' });
 });
 
-app.get('/efectos/verificar/:nombreMedicamento', (req, res) => {
-  const registro = db.prepare('SELECT * FROM efectos_secundarios WHERE UPPER(medicamento) = UPPER(?)').get(req.params.nombreMedicamento);
-  if (registro) {
-    return res.json({ riesgo: true, advertencia: `⚠️ ADVERTENCIA: Este medicamento ya registró un efecto secundario previo (${registro.reaccion}). Evite su uso.` });
-  }
-  res.json({ riesgo: false, mensaje: 'No hay registros de efectos secundarios para este medicamento.' });
+// HU #17: GET - Listar efectos de un paciente específico
+app.get('/efectos/paciente/:paciente_id', (req, res) => {
+  const lista = db.prepare('SELECT * FROM efectos_secundarios WHERE paciente_id = ? ORDER BY fecha_registro DESC').all(req.params.paciente_id);
+  res.json(lista);
 });
 
-app.listen(3000, () => console.log('MedicApp API corriendo con éxito'));
+app.listen(3000, () => console.log('Servidor corriendo con éxito en el puerto 3000'));
