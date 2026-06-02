@@ -62,3 +62,6 @@ Responsabilidades del equipo (Actualización):
 | Renato Pereira         | Product Owner | Revisión de cambios                                  |
 
 ----------------------------------------------------------------------------------------------------------
+## Workflow GitHub
+
+Se realizó el uso de branches para apoyar el desarrollo colaborativo del proyecto.
