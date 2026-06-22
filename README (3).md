@@ -29,7 +29,6 @@ Responsabilidades del equipo:
 | Fabián Gamboa          | Developer     | Historias Usuario-CA/Requerimientos Extrafuncionales |
 | Sebastián Rodriguez    | Scrum Master  | Arquitectura del modelo                              |
 | Benjamin Quesada       | Developer     | Arquitectura del modelo                              |
-| Antonella Canale-Mayet | Developer     | Historias Usuario-CA                                 |
 | Renato Pereira         | Product Owner | Mockups del proyecto                                 |
 
 ----------------------------------------------------------------------------------------------------------
