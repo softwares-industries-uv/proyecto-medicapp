@@ -106,6 +106,6 @@ docker-compose up --build
 | Integrante          | Rol(es)         | Ítems de la rúbrica a cargo |
 |---------------------|-----------------|-----------------------------|
 | Fabián Gamboa       | Developer       | 2.1,2.2,2.3,2.4,3.1,3.2,3.3 |
-| Benjamin Quesada    | Developer       | [Ítems]                     |
+| Benjamin Quesada    | Developer       | 2.3,2.4,3.1                 |
 | Sebastian Rodriguez | Scrum Master    | [Ítems]                     |
 | Renato Pereira      | Product Owner   | [Ítems]                     |
