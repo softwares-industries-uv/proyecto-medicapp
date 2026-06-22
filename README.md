@@ -65,3 +65,46 @@ Responsabilidades del equipo (Actualización):
 ## Workflow GitHub
 
 Se realizó el uso de branches para apoyar el desarrollo colaborativo del proyecto.
+
+----------------------------------------------------------------------------------------------------------
+# MedicApp (Entrega 3)
+ 
+## Descripción del sistema
+Medicapp es una solución digital diseñada para optimizar y agilizar la gestión de servicios médicos y de salud. El sistema permite conectar de manera eficiente a pacientes con profesionales médicos, facilitando la administración de citas, el seguimiento de historiales clínicos y la gestión interna de la atención de salud de manera segura y centralizada
+ 
+## Historia de usuario implementada
+| ID    | Nombre                    | Issue |
+|-------|---------------------------|-------|
+| US-XX | [nombre]                  | #N    |
+(Debe integrar: búsqueda con filtro, CRUD de una entidad y transacción que une 2+ entidades)
+ 
+## Artefactos del proyecto
+| Artefacto                          | Ubicación / enlace          |
+|------------------------------------|-----------------------------|
+| Modelo de dominio                  | [enlace o imagen]           |
+| Diagrama de casos de uso           | [enlace o imagen]           |
+| Especificación de HU               | ./EspecificacionHU.md       |
+| Diagrama de estados                | [enlace o imagen]           |
+| Diagrama de despliegue y comp.     | [enlace o imagen]           |
+| Diagrama de componentes            | [enlace o imagen]           |
+| Diagrama de secuencia              | [enlace o imagen]           |
+| Casos de prueba                    | ./CasosDePrueba.md          |
+| Deuda técnica / code smells        | ./DeudaTecnica.md           |
+ 
+## Instrucciones de instalación y ejecución
+### Requisitos previos
+[Lenguaje/versión, base de datos, Docker, etc.]
+### Variables de entorno
+[Lista de variables necesarias]
+### Instalación y ejecución (sin Docker)
+[Comandos paso a paso]
+### Instalación y ejecución (con Docker)  <!-- si aplica (bonus) -->
+docker-compose up --build
+ 
+## Responsabilidades del equipo
+| Integrante          | Rol(es) | Ítems de la rúbrica a cargo |
+|---------------------|---------|-----------------------------|
+| Fabián Gamboa       | [Rol]   | [Ítems]                     |
+| Benjamin Quesada    | [Rol]   | [Ítems]                     |
+| Sebastian Rodriguez | [Rol]   | [Ítems]                     |
+| Renato Pereira      | [Rol]   | [Ítems]                     |
