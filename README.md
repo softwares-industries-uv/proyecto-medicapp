@@ -107,7 +107,7 @@ docker-compose up --build
 | Fabián Gamboa       | Arquitecto                | 2.1, 2.2, 2.3, 2.4, 3.1, 3.2, 3.3 |
 | Benjamin Quesada    | Technical Lead y Developer| 2.3,2.4,3.1                       |
 | Sebastian Rodriguez | Scrum Master              | 1.1, 1.2, 1.3, 5.1                |
-| Renato Pereira      | Quality Assurance         | 4.1                           |
+| Renato Pereira      | Quality Assurance         | 4.1,2.3,3.2                       |
 ## Instalacion y ejecucion
 
 ### Requisitos previos
