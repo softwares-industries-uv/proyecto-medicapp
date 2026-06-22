@@ -103,9 +103,9 @@ Medicapp es una solución digital diseñada para optimizar y agilizar la gestió
 docker-compose up --build
  
 ## Responsabilidades del equipo
-| Integrante          | Rol(es) | Ítems de la rúbrica a cargo |
-|---------------------|---------|-----------------------------|
-| Fabián Gamboa       | [Rol]   | [Ítems]                     |
-| Benjamin Quesada    | [Rol]   | [Ítems]                     |
-| Sebastian Rodriguez | [Rol]   | [Ítems]                     |
-| Renato Pereira      | [Rol]   | [Ítems]                     |
+| Integrante          | Rol(es)         | Ítems de la rúbrica a cargo |
+|---------------------|-----------------|-----------------------------|
+| Fabián Gamboa       | Developer       | 2.1,2.2,2.3,2.4,3.1,3.2,3.3 |
+| Benjamin Quesada    | Developer       | [Ítems]                     |
+| Sebastian Rodriguez | Scrum Master    | [Ítems]                     |
+| Renato Pereira      | Product Owner   | [Ítems]                     |
