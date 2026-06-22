@@ -1,0 +1,111 @@
+Proyecto MedicApp
+
+Lista historias:
+| ID   | Nombre                                                | Issue |
+|------|-------------------------------------------------------|-------|
+| HU01 | Registrar Duracion tratamiento                        |  #12  |
+| HU02 | Recibir recordatorios o notificaciones                |  #13  |
+| HU03 | Ver stock y medicamentos registrados                  |  #14  |
+| HU04 | Ver el historial de medicamentos y dosis              |  #16  |
+| HU05 | Registrar alergias/efectos al medicamento             |  #17  |
+| HU06 | Ver estado de salud del paciente                      |  #18  |
+| HU07 | Ver disponibilidad en hospitales/clinicas             |  #20  |
+| HU08 | Informacion sobre consulta medica                     |  #21  |
+| HU09 | Dar acceso a informacion medica a otros               |  #22  |
+| HU10 | Poder registrarse en la app como usuario              |  #24  |
+| HU11 | Poder iniciar sesion en la app como usuario           |  #25  |
+| HU12 | Editar duracion del tratamiento                       |  #26  |
+| HU13 | Ver cumplimiento tratamiento del paciente             |  #27  |
+| HU14 | Poder registrarse en la app como medico               |  #28  |
+| HU15 | Poder iniciar sesion en la app como medico            |  #29  |
+| HU16 | Acceder al perfil del paciente                        |  #30  |
+
+----------------------------------------------------------------------------------------------------------
+
+Responsabilidades del equipo:
+
+| Integrante             | Rol           | Items de la rubrica a cargo                          |
+|------------------------|---------------|------------------------------------------------------|
+| Fabián Gamboa          | Developer     | Historias Usuario-CA/Requerimientos Extrafuncionales |
+| Sebastián Rodriguez    | Scrum Master  | Arquitectura del modelo                              |
+| Benjamin Quesada       | Developer     | Arquitectura del modelo                              |
+| Antonella Canale-Mayet | Developer     | Historias Usuario-CA                                 |
+| Renato Pereira         | Product Owner | Mockups del proyecto                                 |
+
+----------------------------------------------------------------------------------------------------------
+
+Descripcion del sistema:
+
+MedicApp
+
+Es una aplicacion que permite a pacientes gestionar sus tratamientos medicos, ya sean ligeros o severos,
+mediante recordatorios, control de medicamentos y seguimiento del historial medico, está app va principalmente dirigida
+a personas que ya estan sometidas a un tratamiento medico, pero tambien esta disponible para familiares de los mismos
+o al publico en general, las funcionalidades de MedicApp son:
+
+- Recordatorio de medicamentos: Se utilizan notificaciones para alertar al usuario a tiempo y mejorar el cumplimiento del tratamiento
+- Gestion de tratamientos: Se permite registrar las dosis, frecuencia y duracion para tener un buen control del tratamiento registrado
+- Acceso al historial medico registrado: Se almacena informacion de los tratamientos para hacer mas sencillo el seguimiento y el uso en las consultas medicas
+- Acceso para familiares asociados a el usuario principal: Se otorga el acceso a terceros autorizados para apoyar y mantener historial medico del paciente
+- Busqueda de centros medicos: Se usa la ubicacion del usuario para mostrar centros de salud cercanos a su ubicacion
+- Busqueda de informacion sobre distintos medicamentos: Se incluye busqueda de informacion del medicamento que sean relevantes para un uso informado y seguro
+
+----------------------------------------------------------------------------------------------------------
+
+Responsabilidades del equipo (Actualización):
+
+| Integrante             | Rol           | Items de la rubrica a cargo                          |
+|------------------------|---------------|------------------------------------------------------|
+| Fabián Gamboa          | Developer     | Historias usuario y Clarita Review                   |
+| Sebastián Rodriguez    | Scrum Master  | Github Workflow y Revisión                           |
+| Benjamin Quesada       | Developer     | APIs y Thunder Client                                |
+| Renato Pereira         | Product Owner | Revisión de cambios                                  |
+
+----------------------------------------------------------------------------------------------------------
+## Workflow GitHub
+
+Se realizó el uso de branches para apoyar el desarrollo colaborativo del proyecto.
+
+----------------------------------------------------------------------------------------------------------
+
+# MedicApp (Entrega 3)
+ 
+## Descripción del sistema
+Medicapp es una solución digital diseñada para optimizar y agilizar la gestión de servicios médicos y de salud. El sistema permite conectar de manera eficiente a pacientes con profesionales médicos, facilitando la administración de citas, el seguimiento de historiales clínicos y la gestión interna de la atención de salud de manera segura y centralizada
+ 
+## Historia de usuario implementada
+| ID    | Nombre                                     | Issue |
+|-------|--------------------------------------------|-------|
+| HU-15 | Poder iniciar sesion en la app como medico |  #29  |
+
+
+## Artefactos del proyecto
+| Artefacto                          | Ubicación / enlace          |
+|------------------------------------|-----------------------------|
+| Modelo de dominio                  | <img width="398" height="367" alt="image" src="https://github.com/user-attachments/assets/fbb0a473-ba18-4231-aebd-1019ae43fc82" /> |
+| Diagrama de casos de uso           | <img width="427" height="377" alt="image" src="https://github.com/user-attachments/assets/8ff09e55-be42-4ee2-b50a-4d688576ec7c" /> |
+| Especificación de HU               | ./EspecificacionHU.md       |
+| Diagrama de estados                | <img width="552" height="655" alt="image" src="https://github.com/user-attachments/assets/4d0dbce2-776b-42ee-b7dc-487deeaede2a" /> |
+| Diagrama de despliegue             | <img width="337" height="652" alt="image" src="https://github.com/user-attachments/assets/d9ebb8d5-7f64-41b1-be3e-ff5d6c75ecd1" /> |
+| Diagrama de componentes            | <img width="457" height="402" alt="image" src="https://github.com/user-attachments/assets/ec1fdb93-d683-4d1f-875a-a9fbb02b5f65" /> |
+| Diagrama de secuencia              | <img width="540" height="563" alt="Captura de pantalla 2026-06-22 005508" src="https://github.com/user-attachments/assets/5851898e-8cfb-4591-9fe9-d67f7f5d8687" /> |
+| Casos de prueba                    | ./CasosDePrueba.md          |
+| Deuda técnica / code smells        | ./DeudaTecnica.md           |
+ 
+## Instrucciones de instalación y ejecución
+### Requisitos previos
+[Lenguaje/versión, base de datos, Docker, etc.]
+### Variables de entorno
+[Lista de variables necesarias]
+### Instalación y ejecución (sin Docker)
+[Comandos paso a paso]
+### Instalación y ejecución (con Docker)  <!-- si aplica (bonus) -->
+docker-compose up --build
+ 
+## Responsabilidades del equipo
+| Integrante          | Rol(es)         | Ítems de la rúbrica a cargo       |
+|---------------------|-----------------|-----------------------------------|
+| Fabián Gamboa       | Developer       | 2.1, 2.2, 2.3, 2.4, 3.1, 3.2, 3.3 |
+| Benjamin Quesada    | Developer       | 2.3,2.4,3.1                       |
+| Sebastian Rodriguez | Scrum Master    | 1.1, 1.2, 1.3, 5.1                |
+| Renato Pereira      | Product Owner   | [Ítems]                           |
