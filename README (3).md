@@ -109,3 +109,62 @@ docker-compose up --build
 | Benjamin Quesada    | Developer       | 2.3,2.4,3.1                       |
 | Sebastian Rodriguez | Scrum Master    | 1.1, 1.2, 1.3, 5.1                |
 | Renato Pereira      | Product Owner   | [Ítems]                           |
+
+Instalacion y ejecucion
+
+Requisitos previos
+
+
+Node.js v18 o superior
+npm (incluido con Node.js)
+
+
+Pasos
+
+1. Clonar el repositorio
+
+bashgit clone https://github.com/softwares-industries-uv/proyecto-medicapp.git
+cd proyecto-medicapp
+
+2. Instalar dependencias
+
+bashnpm install
+
+
+Esto instalara todas las dependencias listadas en package.json, incluyendo express, better-sqlite3 y swagger-ui-express.
+
+
+
+3. Iniciar el servidor
+
+bashnpm start
+
+El servidor queda disponible en: http://localhost:3000
+
+4. Verificar funcionamiento
+
+Abre el navegador en http://localhost:3000. Si la autenticacion esta activa (por defecto), redirigira al login de medico.
+
+La documentacion Swagger de la API esta disponible en: http://localhost:3000/docs
+
+Variables de entorno (opcionales)
+
+VariableDescripcionValor por defectoAUTH_ENABLEDActiva o desactiva el flujo de autenticacion (true/false)true
+
+Ejemplo para desactivar la autenticacion durante desarrollo:
+
+bashAUTH_ENABLED=false npm start
+
+Datos de prueba incluidos
+
+La base de datos se inicializa automaticamente con datos de prueba al primer arranque:
+
+
+Medico: RUT 12345678-9, password admin123, institución Hospital Princeton-Plainsboro
+Pacientes: Benjamín Quezada (RUT 21234567-8) y Antonella Silva (RUT 22345678-9)
+
+
+
+Workflow GitHub
+
+Se realizo el uso de branches para apoyar el desarrollo colaborativo del proyecto. Las funcionalidades se desarrollaron en ramas separadas (sub-main, workflow-final) y se integraron a main mediante Pull Requests revisados por el equipo.
