@@ -74,11 +74,11 @@ Se realizó el uso de branches para apoyar el desarrollo colaborativo del proyec
 Medicapp es una solución digital diseñada para optimizar y agilizar la gestión de servicios médicos y de salud. El sistema permite conectar de manera eficiente a pacientes con profesionales médicos, facilitando la administración de citas, el seguimiento de historiales clínicos y la gestión interna de la atención de salud de manera segura y centralizada
  
 ## Historia de usuario implementada
-| ID    | Nombre                    | Issue |
-|-------|---------------------------|-------|
-| US-XX | [nombre]                  | #N    |
-(Debe integrar: búsqueda con filtro, CRUD de una entidad y transacción que une 2+ entidades)
- 
+| ID    | Nombre                                     | Issue |
+|-------|--------------------------------------------|-------|
+| HU-15 | Poder iniciar sesion en la app como medico |  #29  |
+
+
 ## Artefactos del proyecto
 | Artefacto                          | Ubicación / enlace          |
 |------------------------------------|-----------------------------|
