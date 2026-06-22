@@ -67,6 +67,7 @@ Responsabilidades del equipo (Actualización):
 Se realizó el uso de branches para apoyar el desarrollo colaborativo del proyecto.
 
 ----------------------------------------------------------------------------------------------------------
+
 # MedicApp (Entrega 3)
  
 ## Descripción del sistema
