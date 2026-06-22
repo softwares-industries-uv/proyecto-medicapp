@@ -83,7 +83,7 @@ Medicapp es una solución digital diseñada para optimizar y agilizar la gestió
 | Artefacto                          | Ubicación / enlace          |
 |------------------------------------|-----------------------------|
 | Modelo de dominio                  | <img width="398" height="367" alt="image" src="https://github.com/user-attachments/assets/fbb0a473-ba18-4231-aebd-1019ae43fc82" /> |
-| Diagrama de casos de uso           | [enlace o imagen]           |
+| Diagrama de casos de uso           | <img width="427" height="377" alt="image" src="https://github.com/user-attachments/assets/8ff09e55-be42-4ee2-b50a-4d688576ec7c" /> |
 | Especificación de HU               | ./EspecificacionHU.md       |
 | Diagrama de estados                | [enlace o imagen]           |
 | Diagrama de despliegue y comp.     | [enlace o imagen]           |
